@@ -3,10 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Booking;
-use App\Entity\Customer;
 use App\Entity\service;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,6 +21,27 @@ class BookingType extends AbstractType
             ->add('address', TextType::class)
             ->add('postal_code')
             ->add('moreInformation')
+
+            ->add('place_type', ChoiceType::class, [
+                'label' => 'Type de lieu',
+                'choices' => Booking::PLACE_TYPES,
+                'placeholder' => 'Sélectionnez un type de lieu',
+            ])
+            ->add('urgency_type', ChoiceType::class, [
+                'label' => 'Niveau d\'urgence',
+                'choices' => Booking::URGENCY_TYPES,
+                'placeholder' => 'Sélectionnez le niveau d\'urgence',
+            ])
+            ->add('target_type', ChoiceType::class, [
+                'label' => 'Cible à exorciser',
+                'choices' => Booking::TARGET_TYPES,
+                'placeholder' => 'Sélectionnez la cible',
+            ])
+            ->add('objective_type', ChoiceType::class, [
+                'label' => 'Objectif de l\'intervention',
+                'choices' => Booking::OBJECTIVE_TYPES,
+                'placeholder' => 'Sélectionnez l\'objectif',
+            ])
 
             ->add('customer', CustomerType::class, [
                 'label' => false,

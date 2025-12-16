@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\BookingRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: BookingRepository::class)]
 class Booking
@@ -34,16 +35,70 @@ class Booking
     #[ORM\JoinColumn(nullable: false)]
     private ?Service $service = null;
 
+    public const PLACE_TYPE_HOUSE = 'house';
+    public const PLACE_TYPE_APARTMENT = 'apartment';
+    public const PLACE_TYPE_OUTDOOR = 'outdoor';
+    public const PLACE_TYPE_HISTORICAL = 'historical';
+    public const PLACE_TYPE_COMPANY = 'company'; 
+    public const PLACE_TYPE_OTHER = 'other';
+
+    public const PLACE_TYPES = [
+        'Maison / pavillon' => self::TYPE_HOUSE,
+        'Appartement' => self::TYPE_APARTMENT,
+        'Lieu en extérieur' => self::TYPE_OUTDOOR,
+        'Bâtiment historique' => self::TYPE_HISTORICAL,
+        'Local d\'entreprise' => self::TYPE_COMPANY,
+        'Autre' => self::TYPE_OTHER
+    ];
+
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Choice(choices: Booking::PLACE_TYPES, message: 'Vueillez choisir un type de lieu valide.')]
     private ?string $location_type = null;
 
+    public const URGENCY_TYPE_LOW = 'low';
+    public const URGENCY_TYPE_MEDIUM = 'medium';
+    public const URGENCY_TYPE_HIGH = 'high';
+    public const URGENCY_TYPE_CRITICAL = 'critical';
+
+    public const URGENCY_TYPES = [
+        'Urgence faible' => self::URGENCY_LOW,
+        'Urgence modérée' => self::URGENCY_MEDIUM,
+        'Urgence élevée' => self::URGENCY_HIGH,
+        'Urgence critique' => self::URGENCY_CRITICAL
+    ];
+
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Choice(choices: Booking::URGENCY_TYPES, message: 'Vueillez choisir un niveau d\'urgence valide.')]
     private ?string $urgency_rank = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $target_type = null;
+    public const TARGET_TYPE_PLACE = 'place';
+    public const TARGET_TYPE_OBJECT = 'object';
+    public const TARGET_TYPE_ANIMAL = 'animal';
+    public const TARGET_TYPE_PERSON = 'person';
+
+    public const TARGET_TYPES = [
+        'Un lieu' => self::TARGET_PLACE,
+        'Un objet' => self::TARGET_OBJECT,
+        'Un animal' => self::TARGET_TYPE_ANIMAL,
+        'Une personne' => self::TARGET_TYPE_PERSON
+    ];
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Choice(choices: Booking::TARGET_TYPES, message: 'Vueillez choisir un type de cible valide.')]
+    private ?string $target_type = null;
+
+    public const OBJECTIVE_TYPE_DIAGNOSTIC = 'diagnostic';
+    public const OBJECTIVE_TYPE_PURIFICATION = 'purification';
+    public const OBJECTIVE_TYPE_EXORCISM = 'exorcism';
+
+    public const OBJECTIVE_TYPES = [
+        'Diagnostique' => self::OBJECTIVE_TYPE_DIAGNOSTIC,
+        'Purification' => self::OBJECTIVE_TYPE_PURIFICATION,
+        'Exorcisme' => self::OBJECTIVE_TYPE_EXORCISM
+    ];
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Choice(choices: Booking::OBJECTIVE_TYPES, message: 'Vueillez choisir un objectif d\'intervention valide.')]
     private ?string $objective_type = null;
 
     public function getId(): ?int
