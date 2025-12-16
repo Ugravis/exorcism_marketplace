@@ -5,22 +5,24 @@
         <title>{% block title %}Exoris{% endblock %}</title>
 
         {% block stylesheets %}
-            {{ encore_entry_script_tags('app') }}
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
 
     <body>
-        {% include "partials/_navbar.html.twig" %}
+        <div class="nav-and-main">
+            {% include "partials/_navbar.html.twig" %}
 
-        <main>
-            {% block body %}<p>dededed</p>{% endblock %}
-        </main>
+            <main>
+                {% block body %}{% endblock %}
+            </main>
+        </div>
 
         {% include "partials/_footer.html.twig" %}
 
         {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            {# {{ encore_entry_script_tags('app') }}
+            {% block importmap %}{{ importmap('app') }}{% endblock %} #}
         {% endblock %}
     </body>
 </html>
