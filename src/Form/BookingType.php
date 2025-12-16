@@ -22,12 +22,12 @@ class BookingType extends AbstractType
             ->add('postal_code')
             ->add('moreInformation')
 
-            ->add('place_type', ChoiceType::class, [
+            ->add('location_type', ChoiceType::class, [
                 'label' => 'Type de lieu',
-                'choices' => Booking::PLACE_TYPES,
+                'choices' => Booking::LOCATION_TYPES,
                 'placeholder' => 'Sélectionnez un type de lieu',
             ])
-            ->add('urgency_type', ChoiceType::class, [
+            ->add('urgency_rank', ChoiceType::class, [
                 'label' => 'Niveau d\'urgence',
                 'choices' => Booking::URGENCY_TYPES,
                 'placeholder' => 'Sélectionnez le niveau d\'urgence',

@@ -38,6 +38,11 @@
             {{ form_widget(form.sheduledAt) }}
             {{ form_errors(form.sheduledAt) }}
         </div>
+        <div class="flex-col">
+            {{ form_label(form.target_type) }}
+            {{ form_widget(form.target_type) }}
+            {{ form_errors(form.target_type) }}
+        </div>
 
         <div class="flex-col">
             {{ form_label(form.address) }}
