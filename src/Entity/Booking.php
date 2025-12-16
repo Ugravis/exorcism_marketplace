@@ -34,6 +34,18 @@ class Booking
     #[ORM\JoinColumn(nullable: false)]
     private ?Service $service = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $location_type = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $urgency_rank = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $target_type = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $objective_type = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -107,6 +119,54 @@ class Booking
     public function setService(?Service $service): static
     {
         $this->service = $service;
+
+        return $this;
+    }
+
+    public function getLocationType(): ?string
+    {
+        return $this->location_type;
+    }
+
+    public function setLocationType(?string $location_type): static
+    {
+        $this->location_type = $location_type;
+
+        return $this;
+    }
+
+    public function getUrgencyRank(): ?string
+    {
+        return $this->urgency_rank;
+    }
+
+    public function setUrgencyRank(?string $urgency_rank): static
+    {
+        $this->urgency_rank = $urgency_rank;
+
+        return $this;
+    }
+
+    public function getTargetType(): ?string
+    {
+        return $this->target_type;
+    }
+
+    public function setTargetType(?string $target_type): static
+    {
+        $this->target_type = $target_type;
+
+        return $this;
+    }
+
+    public function getObjectiveType(): ?string
+    {
+        return $this->objective_type;
+    }
+
+    public function setObjectiveType(?string $objective_type): static
+    {
+        $this->objective_type = $objective_type;
 
         return $this;
     }
