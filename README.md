@@ -1,6 +1,10 @@
 # Exorcism marketplace
 [![Technos](https://skillicons.dev/icons?i=php,symfony,mysql,sass)](https://skillicons.dev)
 
+# Helper
+`export PATH="/Applications/XAMPP/xamppfiles/bin:$PATH"`
+`source ~/.zshrc`
+
 # Project access
 🔗 [Localhost:8000 - dev](http://127.0.0.1:8000)  
 🔗 [sae301.mmi24c16.mmi-troyes.fr](https://sae301.mmi24c16.mmi-troyes.fr)
