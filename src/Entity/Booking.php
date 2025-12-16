@@ -26,6 +26,14 @@ class Booking
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $moreInformation = null;
 
+    #[ORM\ManyToOne(inversedBy: 'bookings')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?customer $customer = null;
+
+    #[ORM\ManyToOne(inversedBy: 'bookings')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?service $service = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +83,30 @@ class Booking
     public function setMoreInformation(?string $moreInformation): static
     {
         $this->moreInformation = $moreInformation;
+
+        return $this;
+    }
+
+    public function getCustomer(): ?customer
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?customer $customer): static
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    public function getService(): ?service
+    {
+        return $this->service;
+    }
+
+    public function setService(?service $service): static
+    {
+        $this->service = $service;
 
         return $this;
     }
