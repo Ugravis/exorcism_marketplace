@@ -8,20 +8,35 @@ $colors: (
 
 @mixin body-font($size: 16px, $color: 'dark-txt') {
   color: map.get($colors, $color);
-  font-family: v.$font-sans;
+  font-family: v.$font-sans-regular;
   font-size: $size;
   line-height: 150%;
 }
 
-@mixin title-font($size, $weight: bold, $color: 'dark-txt') {
+@mixin title-font($size, $font-style: 'bold', $color: 'dark-txt') {
   color: map.get($colors, $color);
-  font-family: v.$font-serif;
+  font-family: v.$font-serif-bold;
   font-size: $size;
-  font-weight: $weight;
+
+  @if $font-style == 'bold' {
+    font-family: v.$font-serif-bold;
+    font-weight: bold;
+
+  } @else if $font-style == 'regular' {
+    font-family: v.$font-serif-regular;
+  }
 }
 
-h1 {
+h1, .h1 {
   @include title-font(32px);
+}
+
+h3, .h3 {
+  @include title-font(18px, 'regular')
+}
+
+h4, .h4 {
+  @include title-font(18px)
 }
 
 .heavy-h1 {
@@ -30,6 +45,6 @@ h1 {
   letter-spacing: -2px;
 }
 
-p, a {
+p, .p, a, .a {
   @include body-font();
 }

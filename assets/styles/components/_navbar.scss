@@ -1,0 +1,32 @@
+@use '../variables' as v;
+
+.nav-element {
+  padding: 6px 26px;
+  border-radius: 9999px;
+}
+
+.nav-element-active {
+  background-color: v.$theme-light-background-darker;
+}
+
+#nav-principal {
+  margin: 30px 40px;
+
+  ul {
+    display: flex;
+    gap: 50px;
+  }
+
+  .logo-temp {
+    background-color: v.$theme-light-text-dark;
+    width: 25px;
+    height: 25px;
+    border-radius: 9999px;
+  }
+
+  div {
+    &:first-child, &:last-child {
+      gap: 25px;
+    }
+  }
+}

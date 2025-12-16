@@ -3,7 +3,7 @@
 
 body {
   @include texts.body-font();
-  width: 100vw;
+  width: 100%;
 }
 
 .nav-and-main {
