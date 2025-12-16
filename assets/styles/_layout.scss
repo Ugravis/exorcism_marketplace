@@ -1,0 +1,19 @@
+@use 'variables' as v;
+@use 'texts';
+
+body {
+  @include texts.body-font();
+  width: 100vw;
+}
+
+.nav-and-main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100vh;
+  background-color: v.$theme-light-background-default;
+}
+
+main {
+  height: 100%;
+}

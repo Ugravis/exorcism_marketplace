@@ -1,0 +1,19 @@
+.text-center {
+  text-align: center;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-center-vert {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.heigth-max {
+  height: 100%;
+}

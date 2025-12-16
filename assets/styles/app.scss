@@ -1,7 +1,13 @@
-@use 'variables';
-
 @use 'reset';
-@use 'base';
+
+@use 'variables';
+@use 'utils';
+
+@use 'texts';
+@use 'components/buttons';
+
+@use 'pages/home.scss';
+
 @use 'layout';
 
 @use 'components/navbar';

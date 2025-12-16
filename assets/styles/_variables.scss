@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900');
+
+@font-face {
+  font-family: "Source Serif pro bold";
+  src: 
+    url('../fonts/source-serif-pro/SourceSerifPro-Bold.woff2') format('woff2'), 
+    url('../fonts/source-serif-pro/SourceSerifPro-Bold.woff') format('woff');
+  font-display: swap;
+}
+
+$font-serif: 'Source Serif pro bold', serif;
+$font-sans: 'Inter', sans-serif;
+
+$theme-light-background-default: #FFFDF3;
+$theme-light-yellow-primary: #F9FB78;
+$theme-light-text-dark: #2A2A00;
+$theme-light-text-light: #C5C5C5;

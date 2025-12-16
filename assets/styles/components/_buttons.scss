@@ -1,0 +1,18 @@
+@use '../variables' as v;
+
+@mixin button($size: 'large') {
+  background-color: v.$theme-light-yellow-primary;
+
+  border: none;
+  border-radius: 9999px;
+
+  @if $size == 'large' {
+    padding: 20px 40px; 
+  } @else {
+    padding: 15px 35px;
+  }
+}
+
+.btn-large {
+  @include button('large')
+}
