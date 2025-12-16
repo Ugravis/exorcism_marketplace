@@ -20,14 +20,18 @@ class BookingType extends AbstractType
             ->add('address')
             ->add('postal_code')
             ->add('moreInformation')
-            ->add('customer', EntityType::class, [
-                'class' => Customer::class,
-                'choice_label' => 'id',
+
+            ->add('customer', CustomerType::class, [
+                'label' => false,
+                'mapped' => true
+                // 'choice_label' => 'id',
             ])
+
             ->add('service', EntityType::class, [
                 'class' => service::class,
                 'choice_label' => 'id',
             ])
+
             ->add('submit', SubmitType::class, [
                 'label' => 'Réserver',
             ]);

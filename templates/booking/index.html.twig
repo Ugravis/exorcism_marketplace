@@ -8,31 +8,55 @@
 
         {{ form_start(form, { 'attr': { 'class': 'flex-col' }}) }}
         
-        <div class="form-group">
+        <div class="flex-col">
+            {{ form_label(form.customer.firstName) }}
+            {{ form_widget(form.customer.firstName) }}
+            {{ form_errors(form.customer.firstName) }}
+        </div>
+
+        <div class="flex-col">
+            {{ form_label(form.customer.surname) }}
+            {{ form_widget(form.customer.surname) }}
+            {{ form_errors(form.customer.surname) }}
+        </div>
+
+        <div class="flex-col">
+            {{ form_label(form.customer.email) }}
+            {{ form_widget(form.customer.email) }}
+            {{ form_errors(form.customer.email) }}
+        </div>
+
+        <div class="flex-col">
+            {{ form_label(form.customer.phone) }}
+            {{ form_widget(form.customer.phone) }}
+            {{ form_errors(form.customer.phone) }}
+        </div>
+        
+        <div class="flex-col">
             {{ form_label(form.sheduledAt) }}
             {{ form_widget(form.sheduledAt) }}
             {{ form_errors(form.sheduledAt) }}
         </div>
 
-        <div class="form-group">
+        <div class="flex-col">
             {{ form_label(form.address) }}
             {{ form_widget(form.address) }}
             {{ form_errors(form.address) }}
         </div>
 
-        <div class="form-group">
+        <div class="flex-col">
             {{ form_label(form.postal_code) }}
             {{ form_widget(form.postal_code) }}
             {{ form_errors(form.postal_code) }}
         </div>
 
-        <div class="form-group">
+        <div class="flex-col">
             {{ form_label(form.moreInformation) }}
             {{ form_widget(form.moreInformation) }}
             {{ form_errors(form.moreInformation) }}
         </div>
         
-        <div class="form-group">
+        <div>
             {{ form_widget(form.submit, { 'attr': { 'class': 'btn-small' }}) }}
         </div>
 

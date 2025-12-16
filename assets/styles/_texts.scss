@@ -32,11 +32,15 @@ h1, .h1 {
 }
 
 h3, .h3 {
+  @include title-font(18px)
+}
+
+.h3-regular {
   @include title-font(18px, 'regular')
 }
 
 h4, .h4 {
-  @include title-font(18px)
+  @include title-font(16px)
 }
 
 .heavy-h1 {
