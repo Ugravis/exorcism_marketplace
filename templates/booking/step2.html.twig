@@ -9,7 +9,6 @@
         {{ form_start(form, { 'attr': { 'class': 'flex-col' }}) }}
         
         <div class="flex-col">
-            {# {{ form_label(form.customer.firstName) }} #}
             {{ form_label(form.customer.firstName) }}
             {{ form_widget(form.customer.firstName) }}
             {{ form_errors(form.customer.firstName) }}
@@ -38,11 +37,6 @@
             {{ form_widget(form.sheduledAt) }}
             {{ form_errors(form.sheduledAt) }}
         </div>
-        <div class="flex-col">
-            {{ form_label(form.target_type) }}
-            {{ form_widget(form.target_type) }}
-            {{ form_errors(form.target_type) }}
-        </div>
 
         <div class="flex-col">
             {{ form_label(form.address) }}
@@ -55,17 +49,11 @@
             {{ form_widget(form.postal_code) }}
             {{ form_errors(form.postal_code) }}
         </div>
-
-        <div class="flex-col">
-            {{ form_label(form.moreInformation) }}
-            {{ form_widget(form.moreInformation) }}
-            {{ form_errors(form.moreInformation) }}
-        </div>
         
         <div>
             {{ form_widget(form.submit, { 'attr': { 'class': 'btn-small' }}) }}
         </div>
 
-        {{ form_end(form, {'render_rest': false}) }}
+        {{ form_end(form) }}
     </div>
 {% endblock %}

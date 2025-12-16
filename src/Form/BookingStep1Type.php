@@ -12,15 +12,15 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class BookingType extends AbstractType
+class BookingStep1Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('sheduledAt')
-            ->add('address', TextType::class)
-            ->add('postal_code')
-            ->add('moreInformation')
+            ->add('moreInformation', TextType::class, [
+                'label' => 'Informations supplémentaires (optionnel)',
+                'required' => false
+            ])
 
             ->add('location_type', ChoiceType::class, [
                 'label' => 'Type de lieu',
@@ -43,19 +43,8 @@ class BookingType extends AbstractType
                 'placeholder' => 'Sélectionnez l\'objectif',
             ])
 
-            ->add('customer', CustomerType::class, [
-                'label' => false,
-                'mapped' => true
-                // 'choice_label' => 'id',
-            ])
-
-            ->add('service', EntityType::class, [
-                'class' => service::class,
-                'choice_label' => 'id',
-            ])
-
             ->add('submit', SubmitType::class, [
-                'label' => 'Réserver',
+                'label' => 'Définir le rendez-vous',
             ]);
         ;
     }

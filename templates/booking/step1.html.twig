@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Booking{% endblock %}
+
+{% block body %}
+    <div id="booking-page">
+        <h1>Booking step 1</h1>
+
+        {{ form_start(form, { 'attr': { 'class': 'flex-col' }}) }}
+        
+        <div class="flex-col">
+            {{ form_label(form.location_type) }}
+            {{ form_widget(form.location_type) }}
+            {{ form_errors(form.location_type) }}
+        </div>
+
+        <div class="flex-col">
+            {{ form_label(form.urgency_rank) }}
+            {{ form_widget(form.urgency_rank) }}
+            {{ form_errors(form.urgency_rank) }}
+        </div>
+        
+        <div class="flex-col">
+            {{ form_label(form.target_type) }}
+            {{ form_widget(form.target_type) }}
+            {{ form_errors(form.target_type) }}
+        </div>
+
+        <div class="flex-col">
+            {{ form_label(form.objective_type) }}
+            {{ form_widget(form.objective_type) }}
+            {{ form_errors(form.objective_type) }}
+        </div>
+
+        <div class="flex-col">
+            {{ form_label(form.moreInformation) }}
+            {{ form_widget(form.moreInformation) }}
+            {{ form_errors(form.moreInformation) }}
+        </div>
+        
+        <div>
+            {{ form_widget(form.submit, { 'attr': { 'class': 'btn-small' }}) }}
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
