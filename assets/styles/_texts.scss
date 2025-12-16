@@ -10,6 +10,7 @@ $colors: (
   color: map.get($colors, $color);
   font-family: v.$font-sans;
   font-size: $size;
+  line-height: 150%;
 }
 
 @mixin title-font($size, $weight: bold, $color: 'dark-txt') {
