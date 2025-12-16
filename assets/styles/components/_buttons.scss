@@ -12,10 +12,15 @@
     padding: 20px 40px; 
 
   } @else {
-    padding: 15px 35px;
+    @include texts.title-font(18px, 'regular');
+    padding: 5px 18px;
   }
 }
 
 .btn-large {
   @include button('large')
+}
+
+.btn-small {
+  @include button('small')
 }
