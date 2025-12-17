@@ -152,6 +152,9 @@ class Booking
     #[Assert\Length(max: 50, groups: ['step2'], maxMessage: "L'adresse complémentaire ne peut pas dépasser {{ limit }} caractères.")]
     private ?string $address_line_2 = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $city = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -285,6 +288,18 @@ class Booking
     public function setAddressLine2(?string $address_line_2): static
     {
         $this->address_line_2 = $address_line_2;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): static
+    {
+        $this->city = $city;
 
         return $this;
     }
