@@ -16,19 +16,24 @@ class Booking
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(groups: ['step2'], message: "Vueillez sélectionner une date et heure.")]
     private ?\DateTime $sheduledAt = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(groups: ['step2'], message: "Vueillez saisir l'adresse du rendez-vous.")]
     private ?string $address = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(groups: ['step2'], message: "Vueillez saisir le code postal du rendez-vous.")]
     private ?string $postal_code = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $moreInformation = null;
 
-    #[ORM\ManyToOne(inversedBy: 'bookings')]
+    #[ORM\ManyToOne(inversedBy: 'bookings', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(groups: ['step2'])]
+    #[Assert\Valid]
     private ?Customer $customer = null;
 
     #[ORM\ManyToOne(inversedBy: 'bookings')]
@@ -52,6 +57,7 @@ class Booking
     ];
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(groups: ['step1'], message: "Vueillez choisir un type de lieu.")]
     #[Assert\Choice(choices: Booking::LOCATION_TYPES, message: 'Vueillez choisir un type de lieu valide.')]
     private ?string $location_type = null;
 
@@ -68,6 +74,7 @@ class Booking
     ];
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(groups: ['step1'], message: "Vueillez choisir un niveau d'urgence.")]
     #[Assert\Choice(choices: Booking::URGENCY_TYPES, message: 'Vueillez choisir un niveau d\'urgence valide.')]
     private ?string $urgency_rank = null;
 
@@ -86,6 +93,7 @@ class Booking
     ];
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(groups: ['step1'], message: "Vueillez choisir un type de cible.")]
     #[Assert\Choice(choices: Booking::TARGET_TYPES, message: 'Vueillez choisir un type de cible valide.')]
     private ?string $target_type = null;
 
@@ -102,6 +110,7 @@ class Booking
     ];
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(groups: ['step1'], message: "Vueillez choisir un objectif d'intervention.")]
     #[Assert\Choice(choices: Booking::OBJECTIVE_TYPES, message: 'Vueillez choisir un objectif d\'intervention valide.')]
     private ?string $objective_type = null;
 

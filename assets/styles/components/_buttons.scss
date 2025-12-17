@@ -1,9 +1,7 @@
 @use '../variables' as v;
 @use '../texts';
 
-@mixin button($size: 'large') {
-  background-color: v.$theme-light-yellow-primary;
-
+@mixin button($size: 'large', $rank: 'primary') {
   border: none;
   border-radius: 9999px;
 
@@ -15,6 +13,12 @@
     @include texts.title-font(18px, 'regular');
     padding: 5px 18px;
   }
+
+  @if $rank == 'primary' {
+    background-color: v.$theme-light-yellow-primary;
+  } @else if $rank == 'secundary' {
+    background-color: v.$theme-light-background-light;
+  }
 }
 
 .btn-large {
@@ -23,4 +27,8 @@
 
 .btn-small {
   @include button('small')
+}
+
+.btn-small-secundary {
+  @include button('small', 'secundary');
 }

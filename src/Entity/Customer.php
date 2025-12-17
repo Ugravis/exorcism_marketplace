@@ -6,6 +6,7 @@ use App\Repository\CustomerRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
 class Customer
@@ -16,12 +17,16 @@ class Customer
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(groups: ['step2'], message: "Vueillez saisir votre prénom.")]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(groups: ['step2'], message: "Vueillez saisir votre nom.")]
     private ?string $surname = null;
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Assert\NotBlank(groups: ['step2'], message: "Vueillez saisir votre adresse mail.")]
+    #[Assert\Email(groups: ['step2'], message: "Vous devez saisir une adresse mail valide. Exemple : john@doe.fr")]
     private ?string $email = null;
 
     #[ORM\Column(length: 255, nullable: true)]

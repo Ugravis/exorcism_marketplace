@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Services{% endblock %}
+
+{% block body %}
+
+<div id="service-page" class="flex-col">
+    <h1>{{ service.title }}</h1>
+    <p>{{ service.description }}</p>
+    <a href="{{ path('app_booking_step1', {'id': service.id}) }}" class="visible-link">Obtenir un devis</a>
+    <a href="{{ path('app_services') }}" class="visible-link">Retour à la liste des services</a>
+</div>
+{% endblock %}

@@ -4,7 +4,17 @@
 
 {% block body %}
 
-<div id="services-page">
-    <h1>Services</h1>
+<div id="services-page" class="flex-col">
+    <h1>Nos services</h1>
+
+    <ul class="flex-col">
+        {% for service in services %}
+            <li>
+                <a href="{{ path('app_service_details', {'id': service.id}) }}" class="visible-link">
+                    {{ service.title }} ({{ service.price }}€)
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
 </div>
 {% endblock %}

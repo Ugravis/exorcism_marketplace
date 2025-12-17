@@ -6,51 +6,53 @@
     <div id="booking-page">
         <h1>Booking</h1>
 
-        {{ form_start(form, { 'attr': { 'class': 'flex-col' }}) }}
+        {# {{ form_start(form, { 'attr': { 'class': 'flex-col' }}) }} #}
+        {{ form_start(form, { 'attr': { 'novalidate': 'novalidate', 'class': 'flex-col' }}) }}
         
-        <div class="flex-col">
+        <div class="flex-col input-group">
             {{ form_label(form.customer.firstName) }}
             {{ form_widget(form.customer.firstName) }}
             {{ form_errors(form.customer.firstName) }}
         </div>
 
-        <div class="flex-col">
+        <div class="flex-col input-group">
             {{ form_label(form.customer.surname) }}
             {{ form_widget(form.customer.surname) }}
             {{ form_errors(form.customer.surname) }}
         </div>
 
-        <div class="flex-col">
+        <div class="flex-col input-group">
             {{ form_label(form.customer.email) }}
             {{ form_widget(form.customer.email) }}
             {{ form_errors(form.customer.email) }}
         </div>
 
-        <div class="flex-col">
+        <div class="flex-col input-group">
             {{ form_label(form.customer.phone) }}
             {{ form_widget(form.customer.phone) }}
             {{ form_errors(form.customer.phone) }}
         </div>
         
-        <div class="flex-col">
+        <div class="flex-col input-group">
             {{ form_label(form.sheduledAt) }}
             {{ form_widget(form.sheduledAt) }}
             {{ form_errors(form.sheduledAt) }}
         </div>
 
-        <div class="flex-col">
+        <div class="flex-col input-group">
             {{ form_label(form.address) }}
             {{ form_widget(form.address) }}
             {{ form_errors(form.address) }}
         </div>
 
-        <div class="flex-col">
+        <div class="flex-col input-group">
             {{ form_label(form.postal_code) }}
             {{ form_widget(form.postal_code) }}
             {{ form_errors(form.postal_code) }}
         </div>
         
         <div>
+            <a href="{{ path('app_booking_step1', { 'id': service.id }) }}" class="btn-small-secundary">Etape précédente</a>
             {{ form_widget(form.submit, { 'attr': { 'class': 'btn-small' }}) }}
         </div>
 

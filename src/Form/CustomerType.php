@@ -35,6 +35,7 @@ class CustomerType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Customer::class,
+            'validation_groups' => ['step2']
         ]);
     }
 }

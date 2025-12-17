@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Resume{% endblock %}
+
+{% block body %}
+    <div id="booking-result-page" class="flex-col">
+        <h1>Demande envoyée</h1>
+        <p>Numéro de votre demande : {{ booking.id }}</p>
+        <a href="{{ path('app_services') }}" class="visible-link">Retour à la liste des services</a>
+    </div>
+{% endblock %}

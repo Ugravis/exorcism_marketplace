@@ -52,3 +52,19 @@ h4, .h4, label {
 p, .p, a, .a {
   @include body-font();
 }
+
+.p2 {
+  @include body-font(14px);
+}
+
+// // // Temp // // //
+
+.visible-link {
+  text-decoration: underline;
+  color: rgb(0, 55, 255);
+}
+
+.input-group ul li {
+  @include body-font(14px);
+  color: red;
+}

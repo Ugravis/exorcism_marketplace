@@ -33,13 +33,7 @@ class BookingStep2Type extends AbstractType
             ->add('customer', CustomerType::class, [
                 'label' => false,
                 'mapped' => true
-                // 'choice_label' => 'id',
             ])
-
-            // ->add('service', EntityType::class, [
-            //     'class' => service::class,
-            //     'choice_label' => 'id',
-            // ])
 
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider et obtenir un devis',
@@ -51,6 +45,7 @@ class BookingStep2Type extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Booking::class,
+            'validation_groups' => ['step2']
         ]);
     }
 }
