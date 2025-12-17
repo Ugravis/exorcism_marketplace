@@ -41,9 +41,13 @@
 
         <div class="flex-col input-group">
             {{ form_label(form.address) }}
-            {{ form_widget(form.address) }}
+            {{ form_widget(form.address, { attr: { 'class': 'address-input-element' }}) }}
             {{ form_errors(form.address) }}
         </div>
+
+        <ul id="address-suggestions">
+            <li>Test</li>
+        </ul>
 
         <div class="flex-col input-group">
             {{ form_label(form.address_line_2) }}

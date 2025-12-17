@@ -6,7 +6,7 @@
     <div id="booking-page">
         <h1>Booking step 1</h1>
 
-        {{ form_start(form, { 'attr': { 'class': 'flex-col' }}) }}
+        {{ form_start(form, { 'attr': { 'novalidate': 'novalidate', 'class': 'flex-col' }}) }}
         
         <div class="flex-col input-group">
             {{ form_label(form.location_type) }}

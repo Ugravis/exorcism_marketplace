@@ -7,7 +7,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@1" rel="stylesheet" />
 
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+            <link rel="stylesheet" href="{{ asset('styles/app.scss') }}">
         {% endblock %}
     </head>
 
@@ -23,8 +23,7 @@
         {% include "partials/_footer.html.twig" %}
 
         {% block javascripts %}
-            {# {{ encore_entry_script_tags('app') }}
-            {% block importmap %}{{ importmap('app') }}{% endblock %} #}
+            {{ importmap('app') }}
         {% endblock %}
     </body>
 </html>

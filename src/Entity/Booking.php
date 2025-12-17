@@ -60,7 +60,7 @@ class Booking
                 max: 500, 
                 maxMessage: "Les informations complémentaires ne peuvent pas dépasser {{ limit }} caractères."
             )
-        ], ['step2']
+        ], ['step1']
     )]
     private ?string $moreInformation = null;
 
