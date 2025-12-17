@@ -16,18 +16,52 @@ class Booking
     private ?int $id = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(groups: ['step2'], message: "Vueillez sélectionner une date et heure.")]
+    #[Assert\Sequentially(
+        [
+            new Assert\NotBlank(
+                message: "Vueillez sélectionner une date et heure."
+            )
+        ], groups: ['step2']
+    )]
     private ?\DateTime $sheduledAt = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank(groups: ['step2'], message: "Vueillez saisir l'adresse du rendez-vous.")]
+    #[Assert\Sequentially(
+        [
+            new Assert\NotBlank(
+                message: "Vueillez saisir l'adresse du rendez-vous."
+            ),
+            new Assert\Length(
+                max: 255, 
+                maxMessage: "L'adresse ne peut pas dépasser {{ limit }} caractères."
+            )
+        ], groups: ['step2']
+    )]
     private ?string $address = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(groups: ['step2'], message: "Vueillez saisir le code postal du rendez-vous.")]
+    #[Assert\Sequentially(
+        [
+            new Assert\NotBlank(
+                message: "Vueillez saisir le code postal du rendez-vous."
+            ),
+            new Assert\Regex(
+                pattern: "/^[0-9]{5}$/", 
+                message: "Code postal invalide. Exemple : 75000"
+            )
+        ], groups: ['step2']
+    )]
     private ?string $postal_code = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Assert\Sequentially(
+        [
+            new Assert\Length(
+                max: 500, 
+                maxMessage: "Les informations complémentaires ne peuvent pas dépasser {{ limit }} caractères."
+            )
+        ], ['step2']
+    )]
     private ?string $moreInformation = null;
 
     #[ORM\ManyToOne(inversedBy: 'bookings', cascade: ['persist'])]
@@ -115,6 +149,7 @@ class Booking
     private ?string $objective_type = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(max: 50, groups: ['step2'], maxMessage: "L'adresse complémentaire ne peut pas dépasser {{ limit }} caractères.")]
     private ?string $address_line_2 = null;
 
     public function getId(): ?int
@@ -127,7 +162,7 @@ class Booking
         return $this->sheduledAt;
     }
 
-    public function setSheduledAt(\DateTime $sheduledAt): static
+    public function setSheduledAt(?\DateTime $sheduledAt): static
     {
         $this->sheduledAt = $sheduledAt;
 
@@ -139,7 +174,7 @@ class Booking
         return $this->address;
     }
 
-    public function setAddress(string $address): static
+    public function setAddress(?string $address): static
     {
         $this->address = $address;
 
@@ -151,7 +186,7 @@ class Booking
         return $this->postal_code;
     }
 
-    public function setPostalCode(string $postal_code): static
+    public function setPostalCode(?string $postal_code): static
     {
         $this->postal_code = $postal_code;
 

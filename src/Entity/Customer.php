@@ -17,19 +17,65 @@ class Customer
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(groups: ['step2'], message: "Vueillez saisir votre prénom.")]
+    #[Assert\Sequentially(
+        [
+            new Assert\NotBlank(
+                message: "Vueillez saisir votre prénom."
+            ),
+            new Assert\Length(
+                max: 50, 
+                maxMessage: "Le prénom ne peut pas dépasser {{ limit }} caractères."
+            )
+        ], groups:['step2']
+    )]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(groups: ['step2'], message: "Vueillez saisir votre nom.")]
+    #[Assert\Sequentially(
+        [
+            new Assert\NotBlank(
+                message: "Vueillez saisir votre nom."
+            ),
+            new Assert\Length(
+                max: 50, 
+                maxMessage: "Le nom ne peut pas dépasser {{ limit }} caractères."
+            )
+        ], groups:['step2']
+    )]
     private ?string $surname = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Assert\NotBlank(groups: ['step2'], message: "Vueillez saisir votre adresse mail.")]
-    #[Assert\Email(groups: ['step2'], message: "Vous devez saisir une adresse mail valide. Exemple : john@doe.fr")]
+    #[Assert\Sequentially(
+        [
+            new Assert\NotBlank(
+                message: "Vueillez saisir votre adresse mail."
+            ),
+            new Assert\Email(
+                message: "Vous devez saisir une adresse mail valide. Exemple : john@doe.fr"
+            ),
+            new Assert\Length(
+                max: 50, 
+                maxMessage: "L'adresse mail ne peut pas dépasser {{ limit }} caractères."
+            )
+        ], groups: ['step2']
+    )]
     private ?string $email = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Sequentially(
+        [
+            new Assert\Regex(
+                pattern: "/^\+?[0-9\s\-]+$/", 
+                message: "Le numéro de téléphone n'est pas valide."
+            ),
+            new Assert\Length(
+                min: 8, 
+                max: 20, 
+                minMessage: "Le numéro de téléphone doit contenir au moins {{ limit }} caractères.", 
+                maxMessage: "Le numéro de téléphone ne peut pas dépasser {{ limit }} caractères."
+            )
+        ], groups: ['step2']
+    )]
     private ?string $phone = null;
 
     /**
@@ -53,7 +99,7 @@ class Customer
         return $this->firstName;
     }
 
-    public function setFirstName(string $firstName): static
+    public function setFirstName(?string $firstName): static
     {
         $this->firstName = $firstName;
 
@@ -65,7 +111,7 @@ class Customer
         return $this->surname;
     }
 
-    public function setSurname(string $surname): static
+    public function setSurname(?string $surname): static
     {
         $this->surname = $surname;
 
@@ -77,7 +123,7 @@ class Customer
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(?string $email): static
     {
         $this->email = $email;
 
