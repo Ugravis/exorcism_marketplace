@@ -64,7 +64,7 @@ p, .p, a, .a {
   color: rgb(0, 55, 255);
 }
 
-.input-group ul li {
+.input-group ul li, .input-error {
   @include body-font(14px);
   color: red;
 }

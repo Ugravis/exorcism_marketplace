@@ -4,7 +4,7 @@
 
 {% block body %}
     <div id="booking-page">
-        <h1>Booking</h1>
+        <h1>Booking step 2</h1>
 
         {# {{ form_start(form, { 'attr': { 'class': 'flex-col' }}) }} #}
         {{ form_start(form, { 'attr': { 'novalidate': 'novalidate', 'class': 'flex-col' }}) }}
@@ -46,9 +46,23 @@
         </div>
 
         <div class="flex-col input-group">
+            {{ form_label(form.address_line_2) }}
+            {{ form_widget(form.address_line_2) }}
+            {{ form_errors(form.address_line_2) }}
+        </div>
+
+        <div class="flex-col input-group">
             {{ form_label(form.postal_code) }}
             {{ form_widget(form.postal_code) }}
             {{ form_errors(form.postal_code) }}
+        </div>
+
+        <div class="flex-col input-group">
+            <div>
+                {{ form_label(form.acceptTerms) }}
+                {{ form_widget(form.acceptTerms) }}
+            </div>
+            {{ form_errors(form.acceptTerms) }}
         </div>
         
         <div>

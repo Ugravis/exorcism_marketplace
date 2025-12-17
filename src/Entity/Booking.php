@@ -114,6 +114,9 @@ class Booking
     #[Assert\Choice(choices: Booking::OBJECTIVE_TYPES, message: 'Vueillez choisir un objectif d\'intervention valide.')]
     private ?string $objective_type = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $address_line_2 = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -235,6 +238,18 @@ class Booking
     public function setObjectiveType(?string $objective_type): static
     {
         $this->objective_type = $objective_type;
+
+        return $this;
+    }
+
+    public function getAddressLine2(): ?string
+    {
+        return $this->address_line_2;
+    }
+
+    public function setAddressLine2(?string $address_line_2): static
+    {
+        $this->address_line_2 = $address_line_2;
 
         return $this;
     }

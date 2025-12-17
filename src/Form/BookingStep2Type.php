@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Booking;
 use App\Entity\service;
+use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -26,6 +28,10 @@ class BookingStep2Type extends AbstractType
                 'label' => 'Adresse'
             ])
 
+            ->add('address_line_2', TextType::class, [
+                'label' => 'Complément d\'adresse'
+            ])
+
             ->add('postal_code', TextType::class, [
                 'label' => 'Code postal'
             ])
@@ -33,6 +39,18 @@ class BookingStep2Type extends AbstractType
             ->add('customer', CustomerType::class, [
                 'label' => false,
                 'mapped' => true
+            ])
+
+            ->add('acceptTerms', CheckboxType::class, [
+                'label' => 'J\'accepte les conditions d\'utilisation',
+                'mapped' => false,
+                'required' => true,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Vous devez accepter les conditions d\'utilisation.',
+                        'groups' => ['step2']
+                    ])
+                ]
             ])
 
             ->add('submit', SubmitType::class, [
