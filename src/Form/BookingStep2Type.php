@@ -36,6 +36,10 @@ class BookingStep2Type extends AbstractType
                 'label' => 'Code postal'
             ])
 
+            ->add('city', TextType::class, [
+                'label' => 'Ville'
+            ])
+
             ->add('customer', CustomerType::class, [
                 'label' => false,
                 'mapped' => true

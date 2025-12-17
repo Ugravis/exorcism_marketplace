@@ -153,6 +153,17 @@ class Booking
     private ?string $address_line_2 = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Sequentially(
+        [
+            new Assert\NotBlank(
+                message: "Vueillez indiquer la ville du rendez-vous."
+            ),
+            new Assert\Length(
+                max: 50, 
+                maxMessage: "La ville ne peut pas dépasser {{ limit }} caractères."
+            )
+        ], groups: ['step2']
+    )]
     private ?string $city = null;
 
     public function getId(): ?int

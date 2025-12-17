@@ -45,9 +45,7 @@
             {{ form_errors(form.address) }}
         </div>
 
-        <ul id="address-suggestions">
-            <li>Test</li>
-        </ul>
+        <ul id="address-suggestions"></ul>
 
         <div class="flex-col input-group">
             {{ form_label(form.address_line_2) }}
@@ -55,6 +53,12 @@
             {{ form_errors(form.address_line_2) }}
         </div>
 
+        <div class="flex-col input-group">
+            {{ form_label(form.city) }}
+            {{ form_widget(form.city) }}
+            {{ form_errors(form.city) }}
+        </div>
+        
         <div class="flex-col input-group">
             {{ form_label(form.postal_code) }}
             {{ form_widget(form.postal_code) }}
