@@ -1,37 +1,21 @@
 {
-  "devDependencies": {
-    "@babel/core": "^7.17.0",
-    "@babel/preset-env": "^7.16.0",
-    "@symfony/webpack-encore": "^5.3.1",
-    "core-js": "^3.38.0",
-    "regenerator-runtime": "^0.13.9",
-    "sass": "^1.97.0",
-    "sass-loader": "^16.0.6",
-    "webpack": "^5.74.0",
-    "webpack-cli": "^5.1.0"
-  },
-  "license": "UNLICENSED",
-  "private": true,
-  "scripts": {
-    "dev-server": "encore dev-server",
-    "dev": "encore dev",
-    "watch": "encore dev --watch",
-    "build": "encore production --progress"
-  },
-  "name": "exorcism-marketplace",
-  "description": "[![Technos](https://skillicons.dev/icons?i=php,symfony,mysql,sass)](https://skillicons.dev)",
-  "version": "1.0.0",
-  "main": "webpack.config.js",
-  "directories": {
-    "test": "tests"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Ugravis/exorcism_marketplace.git"
-  },
-  "author": "",
-  "bugs": {
-    "url": "https://github.com/Ugravis/exorcism_marketplace/issues"
-  },
-  "homepage": "https://github.com/Ugravis/exorcism_marketplace#readme"
+    "devDependencies": {
+        "@babel/core": "^7.17.0",
+        "@babel/preset-env": "^7.16.0",
+        "@symfony/webpack-encore": "^5.1.0",
+        "core-js": "^3.38.0",
+        "regenerator-runtime": "^0.13.9",
+        "sass": "^1.97.0",
+        "sass-loader": "^16.0.6",
+        "webpack": "^5.74.0",
+        "webpack-cli": "^5.1.0"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    }
 }

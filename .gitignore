@@ -1,4 +1,3 @@
-
 ###> symfony/framework-bundle ###
 *.env
 /.env.local
@@ -26,6 +25,9 @@
 /public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
+###> symfonycasts/sass-bundle ###
+/public/assets/
+###< symfonycasts/sass-bundle ###
 
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
@@ -33,7 +35,3 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
-
-###> symfonycasts/sass-bundle ###
-/public/assets/
-###< symfonycasts/sass-bundle ###
