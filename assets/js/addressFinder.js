@@ -2,47 +2,62 @@ const addressInput = document.getElementById('booking_step2_address')
 const cityInput = document.getElementById('booking_step2_city')
 const postalCodeInput = document.getElementById('booking_step2_postal_code')
 const addressSuggestionsDiv = document.getElementById('address-suggestions')
+
 let controller
+let debounceTimer
 
-addressInput.addEventListener('input', async () => {
-  const query = addressInput.value.trim()
+function fetchWithTimeout(url, timeout, externalSignal) {
+  const timeoutController = new AbortController()
+  const timer = setTimeout(() => timeoutController.abort(), timeout)
 
-  if (query.length < 3) {
-    addressSuggestionsDiv.innerHTML = ''
-    console.log('< 3')
-    return
-  }
+  externalSignal?.addEventListener('abort', () => timeoutController.abort())
 
-  if (controller) controller.abort()
-  controller = new AbortController()
+  return fetch(url, { signal: timeoutController.signal }).finally(() => clearTimeout(timer))
+}
 
-  try {
-    console.log('2')
-    const res = await fetch(
-      `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&limit=6`, {
-        
-        signal: controller.signal
-      }
-    )
+addressInput.addEventListener('input', () => {
+  clearTimeout(debounceTimer)
 
-    const data = await res.json()
-    console.log(data)
-    addressSuggestionsDiv.innerHTML = ''
+  debounceTimer = setTimeout(async () => {
+    const query = addressInput.value.trim()
 
-    data.features.forEach(feature => {
-      const li = document.createElement('li')
-      li.textContent = feature.properties.label
+    if (query.length < 3) {
+      addressSuggestionsDiv.innerHTML = ''
+      return
+    }
 
-      li.addEventListener('click', () => {
-        addressInput.value = feature.properties.name
-        cityInput.value = feature.properties.city
-        postalCodeInput.value = feature.properties.postcode
+    if (controller) controller.abort()
+    controller = new AbortController()
 
-        addressSuggestionsDiv.innerHTML = ''
+    try {
+      const res = await fetchWithTimeout(
+        `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&limit=6`,
+        1000, 
+        controller.signal
+      )
+      if (!res.ok) return
+
+      const data = await res.json()
+      addressSuggestionsDiv.innerHTML = ''
+
+      data.features.forEach(feature => {
+        const li = document.createElement('li')
+        li.textContent = feature.properties.label
+
+        li.addEventListener('click', () => {
+          addressInput.value = feature.properties.name
+          cityInput.value = feature.properties.city
+          postalCodeInput.value = feature.properties.postcode
+          addressSuggestionsDiv.innerHTML = ''
+        })
+
+        addressSuggestionsDiv.appendChild(li)
       })
 
-      addressSuggestionsDiv.appendChild(li)
-    })
-
-  } catch (err) { }
+    } catch (err) {
+      if (err.name !== 'AbortError') {
+        console.error(err)
+      }
+    }
+  }, 400)
 })
