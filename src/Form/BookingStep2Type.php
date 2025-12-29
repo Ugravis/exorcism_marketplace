@@ -21,7 +21,8 @@ class BookingStep2Type extends AbstractType
     {
         $builder
             ->add('sheduledAt', DateTimeType::class, [
-                'label' => 'Date et horaire'
+                'label' => 'Date et horaire',
+                'data' => new \DateTime()
             ])
 
             ->add('address', TextType::class, [
