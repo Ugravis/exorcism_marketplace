@@ -19,7 +19,7 @@ class Booking
     #[Assert\Sequentially(
         [
             new Assert\NotBlank(
-                message: "Vueillez sélectionner une date et heure."
+                message: "- Requis."
             )
         ], groups: ['step2']
     )]
@@ -29,11 +29,11 @@ class Booking
     #[Assert\Sequentially(
         [
             new Assert\NotBlank(
-                message: "Vueillez saisir l'adresse du rendez-vous."
+                message: "- Requis."
             ),
             new Assert\Length(
                 max: 255, 
-                maxMessage: "L'adresse ne peut pas dépasser {{ limit }} caractères."
+                maxMessage: "- Maximum {{ limit }} caractères."
             )
         ], groups: ['step2']
     )]
@@ -43,11 +43,11 @@ class Booking
     #[Assert\Sequentially(
         [
             new Assert\NotBlank(
-                message: "Vueillez saisir le code postal du rendez-vous."
+                message: "- Requis."
             ),
             new Assert\Regex(
                 pattern: "/^[0-9]{5}$/", 
-                message: "Code postal invalide. Exemple : 75000"
+                message: "- Invalide. Exemple : 75000"
             )
         ], groups: ['step2']
     )]
@@ -58,7 +58,7 @@ class Booking
         [
             new Assert\Length(
                 max: 500, 
-                maxMessage: "Les informations complémentaires ne peuvent pas dépasser {{ limit }} caractères."
+                maxMessage: "- Maximum {{ limit }} caractères."
             )
         ], ['step1']
     )]
@@ -91,8 +91,8 @@ class Booking
     ];
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(groups: ['step1'], message: "Vueillez choisir un type de lieu.")]
-    #[Assert\Choice(choices: Booking::LOCATION_TYPES, message: 'Vueillez choisir un type de lieu valide.')]
+    #[Assert\NotBlank(groups: ['step1'], message: "- Veuillez choisir un type de lieu.")]
+    #[Assert\Choice(choices: Booking::LOCATION_TYPES, message: '- Veuillez choisir un type de lieu valide.')]
     private ?string $location_type = null;
 
     public const URGENCY_TYPE_LOW = 'low';
@@ -108,8 +108,8 @@ class Booking
     ];
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(groups: ['step1'], message: "Vueillez choisir un niveau d'urgence.")]
-    #[Assert\Choice(choices: Booking::URGENCY_TYPES, message: 'Vueillez choisir un niveau d\'urgence valide.')]
+    #[Assert\NotBlank(groups: ['step1'], message: "- Veuillez choisir un niveau d'urgence.")]
+    #[Assert\Choice(choices: Booking::URGENCY_TYPES, message: '- Veuillez choisir un niveau d\'urgence valide.')]
     private ?string $urgency_rank = null;
 
     public const TARGET_TYPE_PLACE = 'place';
@@ -127,8 +127,8 @@ class Booking
     ];
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(groups: ['step1'], message: "Vueillez choisir un type de cible.")]
-    #[Assert\Choice(choices: Booking::TARGET_TYPES, message: 'Vueillez choisir un type de cible valide.')]
+    #[Assert\NotBlank(groups: ['step1'], message: "- Veuillez choisir un type de cible.")]
+    #[Assert\Choice(choices: Booking::TARGET_TYPES, message: '- Veuillez choisir un type de cible valide.')]
     private ?string $target_type = null;
 
     public const OBJECTIVE_TYPE_DIAGNOSTIC = 'diagnostic';
@@ -144,8 +144,8 @@ class Booking
     ];
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(groups: ['step1'], message: "Vueillez choisir un objectif d'intervention.")]
-    #[Assert\Choice(choices: Booking::OBJECTIVE_TYPES, message: 'Vueillez choisir un objectif d\'intervention valide.')]
+    #[Assert\NotBlank(groups: ['step1'], message: "- Veuillez choisir un objectif d'intervention.")]
+    #[Assert\Choice(choices: Booking::OBJECTIVE_TYPES, message: '- Veuillez choisir un objectif d\'intervention valide.')]
     private ?string $objective_type = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -156,11 +156,11 @@ class Booking
     #[Assert\Sequentially(
         [
             new Assert\NotBlank(
-                message: "Vueillez indiquer la ville du rendez-vous."
+                message: "- Requis."
             ),
             new Assert\Length(
                 max: 50, 
-                maxMessage: "La ville ne peut pas dépasser {{ limit }} caractères."
+                maxMessage: "Maximum {{ limit }} caractères."
             )
         ], groups: ['step2']
     )]
@@ -171,6 +171,15 @@ class Booking
 
     #[ORM\Column(nullable: true)]
     private ?float $longitude = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
+
 
     public function getId(): ?int
     {
@@ -254,6 +263,11 @@ class Booking
         return $this->location_type;
     }
 
+    public function getLocationLabel(): ?string
+    {
+        return array_search($this->location_type, self::LOCATION_TYPES) ?: null;
+    }
+
     public function setLocationType(?string $location_type): static
     {
         $this->location_type = $location_type;
@@ -264,6 +278,11 @@ class Booking
     public function getUrgencyRank(): ?string
     {
         return $this->urgency_rank;
+    }
+
+    public function getUrgencyLabel(): ?string
+    {
+        return array_search($this->urgency_rank, self::URGENCY_TYPES) ?: null;
     }
 
     public function setUrgencyRank(?string $urgency_rank): static
@@ -278,6 +297,11 @@ class Booking
         return $this->target_type;
     }
 
+    public function getTargetLabel(): ?string
+    {
+        return array_search($this->target_type, self::TARGET_TYPES) ?: null;
+    }
+
     public function setTargetType(?string $target_type): static
     {
         $this->target_type = $target_type;
@@ -288,6 +312,11 @@ class Booking
     public function getObjectiveType(): ?string
     {
         return $this->objective_type;
+    }
+
+    public function getObjectiveLabel(): ?string
+    {
+        return array_search($this->objective_type, self::OBJECTIVE_TYPES) ?: null;
     }
 
     public function setObjectiveType(?string $objective_type): static
@@ -341,6 +370,18 @@ class Booking
     public function setLongitude(?float $longitude): static
     {
         $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

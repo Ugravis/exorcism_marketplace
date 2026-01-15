@@ -1,0 +1,77 @@
+@use '../variables' as v;
+@use '../texts' as t;
+
+#booking-page {
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .booking__image {
+    flex: 0 0 calc(45% - 3rem);
+    min-width: 300px;
+    min-height: 300px;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    background-size: cover;     
+    background-position: center;
+    background-repeat: no-repeat;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: inherit;
+      filter: blur(5px);
+      z-index: 0;
+      transform: scale(1.03);
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 2;
+    }
+  }
+
+  .booking__form {
+    flex: 0 0 calc(55% - 3rem); 
+    min-width: 300px;
+
+    textarea {
+      height: 100px;
+    }
+  }
+
+  .address-group {
+    position: relative;
+
+    #address-suggestions {
+      position: absolute;
+      background-color: v.$theme-light-background-default;
+      box-shadow: 0 0 8px 0 #00000010;
+      border-radius: 10px;
+      top: 0;
+      margin-top: 80px;
+      
+      li {
+        @include t.body-font();
+        padding: 5px 15px;
+        cursor: pointer;
+
+        &:first-of-type { 
+          padding-top: 15px; 
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+        &:last-of-type { 
+          padding-bottom: 15px; 
+          border-bottom-left-radius: 10px;
+          border-bottom-right-radius: 10px;
+        }
+
+        &:hover { background-color: v.$theme-light-background-darker; }
+      }
+    }
+  }
+}

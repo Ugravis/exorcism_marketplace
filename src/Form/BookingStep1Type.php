@@ -21,7 +21,8 @@ class BookingStep1Type extends AbstractType
             ->add('moreInformation', TextareaType::class, [
                 'label' => 'Informations complémentaires (optionnel)',
                 'required' => false,
-                'help' => 'Exemples : accès difficile, présence d’animaux, contraintes horaires, informations utiles pour l’intervention.',
+                'help' => 'Par exemples : accès difficile, présence d’animaux, contraintes horaires, passif de la cible.',
+                'help_attr' => ['class' => 'p4']
             ])
 
             ->add('location_type', ChoiceType::class, [

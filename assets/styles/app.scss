@@ -6,8 +6,16 @@
 
 @use 'texts';
 @use 'components/buttons';
+@use 'components/cards';
+@use 'components/stars';
+@use 'components/separators';
+@use 'components/inputs';
+@use 'components/promo';
 
 @use 'pages/home.scss';
+@use 'pages/serviceInfo.scss';
+@use 'pages/booking.scss';
+@use 'pages/backlog.scss';
 
 @use 'layout';
 

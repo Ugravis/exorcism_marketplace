@@ -20,11 +20,11 @@ class Customer
     #[Assert\Sequentially(
         [
             new Assert\NotBlank(
-                message: "Vueillez saisir votre prénom."
+                message: "- Requis."
             ),
             new Assert\Length(
                 max: 50, 
-                maxMessage: "Le prénom ne peut pas dépasser {{ limit }} caractères."
+                maxMessage: "- Maximum {{ limit }} caractères."
             )
         ], groups:['step2']
     )]
@@ -34,11 +34,11 @@ class Customer
     #[Assert\Sequentially(
         [
             new Assert\NotBlank(
-                message: "Vueillez saisir votre nom."
+                message: "- Requis."
             ),
             new Assert\Length(
                 max: 50, 
-                maxMessage: "Le nom ne peut pas dépasser {{ limit }} caractères."
+                maxMessage: "- Maximum {{ limit }} caractères."
             )
         ], groups:['step2']
     )]
@@ -48,14 +48,14 @@ class Customer
     #[Assert\Sequentially(
         [
             new Assert\NotBlank(
-                message: "Vueillez saisir votre adresse mail."
+                message: "- Requis."
             ),
             new Assert\Email(
-                message: "Vous devez saisir une adresse mail valide. Exemple : john@doe.fr"
+                message: "- Invalide. Exemple : john@doe.fr"
             ),
             new Assert\Length(
                 max: 50, 
-                maxMessage: "L'adresse mail ne peut pas dépasser {{ limit }} caractères."
+                maxMessage: "- Maximum {{ limit }} caractères."
             )
         ], groups: ['step2']
     )]
@@ -66,13 +66,13 @@ class Customer
         [
             new Assert\Regex(
                 pattern: "/^\+?[0-9\s\-]+$/", 
-                message: "Le numéro de téléphone n'est pas valide."
+                message: "- Invalide."
             ),
             new Assert\Length(
                 min: 8, 
                 max: 20, 
-                minMessage: "Le numéro de téléphone doit contenir au moins {{ limit }} caractères.", 
-                maxMessage: "Le numéro de téléphone ne peut pas dépasser {{ limit }} caractères."
+                minMessage: "- Minimum {{ limit }} caractères.", 
+                maxMessage: "- Maximum {{ limit }} caractères."
             )
         ], groups: ['step2']
     )]
@@ -84,9 +84,20 @@ class Customer
     #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'customer')]
     private Collection $bookings;
 
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    /**
+     * @var Collection<int, Review>
+     */
+    #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'customer_id')]
+    private Collection $reviews;
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
+        $this->reviews = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -166,6 +177,48 @@ class Customer
             // set the owning side to null (unless already changed)
             if ($booking->getCustomer() === $this) {
                 $booking->setCustomer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Review>
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): static
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews->add($review);
+            $review->setCustomerId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): static
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getCustomerId() === $this) {
+                $review->setCustomerId(null);
             }
         }
 

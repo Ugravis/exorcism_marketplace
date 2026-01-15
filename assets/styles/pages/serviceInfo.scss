@@ -1,0 +1,25 @@
+#service-page {
+  .top {
+    gap: 4rem;
+    flex-wrap: wrap;
+    min-height: 300px;
+
+    &>div {
+      flex: 1 1 40%;
+      min-width: 300px;
+    }
+
+    .service-info__image {
+      width: 100%;
+      min-height: 300px;
+      border-radius: 15px;
+      background-size: cover;     
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .top-right {
+      justify-content: space-between;
+    }
+  }
+}

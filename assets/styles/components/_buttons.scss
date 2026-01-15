@@ -4,6 +4,8 @@
 @mixin button($size: 'large', $rank: 'primary') {
   border: none;
   border-radius: 9999px;
+  white-space: nowrap;
+  transition: 0.1s;
 
   @if $size == 'large' {
     @include texts.title-font(20px, 'regular');
@@ -16,8 +18,15 @@
 
   @if $rank == 'primary' {
     background-color: v.$theme-light-yellow-primary;
+    &:hover {
+      background-color: v.$theme-light-yellow-primary-hover;
+    }
+
   } @else if $rank == 'secundary' {
     background-color: v.$theme-light-background-light;
+    &:hover {
+      background-color: v.$theme-light-background-light-hover;
+    }
   }
 }
 

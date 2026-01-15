@@ -3,6 +3,10 @@
    License: none (public domain)
 */
 
+.leaflet-popup-tip {
+  display: none;
+}
+
 h2,
 h3,
 h4,
@@ -61,9 +65,6 @@ caption,
 tbody,
 tfoot,
 thead,
-tr,
-th,
-td,
 article,
 aside,
 canvas,

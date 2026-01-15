@@ -32,6 +32,10 @@ final class BookingController extends AbstractController
         $form = $this->createForm(BookingStep1Type::class, $booking);
         $form->handleRequest($request);
 
+        if ($form->isSubmitted()) {
+            $request->getSession()->set('booking', $booking);
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $request->getSession()->set('booking', $booking);
             return $this->redirectToRoute('app_booking_step2', ['id' => $service->getId()]);
@@ -58,6 +62,14 @@ final class BookingController extends AbstractController
         $form = $this->createForm(BookingStep2Type::class, $booking);
         $form->handleRequest($request);
 
+        if ($form->isSubmitted()) {
+            $request->getSession()->set('booking', $booking);
+
+            if ($form->get('back')->isClicked()) {
+                return $this->redirectToRoute('app_booking_step1', ['id' => $service->getId()]);
+            }
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $customer = $booking->getCustomer();
             $existingCustomer = $entityManager->getRepository(Customer::class)->findOneBy(['email' => $customer->getEmail()]);
@@ -81,9 +93,17 @@ final class BookingController extends AbstractController
             ]);
         }
 
+        $existingBookings = $entityManager->getRepository(Booking::class)
+            ->findBy(['service' => $service]);
+
+        $disabledDates = array_map(function($b) {
+            return $b->getSheduledAt()->format('Y-m-d');
+        }, $existingBookings);
+
         return $this->render('/booking/step2.html.twig', [
             'form' => $form->createView(),
-            'service' => $service
+            'service' => $service,
+            'disabledDates' => $disabledDates,
         ]);
     }
 

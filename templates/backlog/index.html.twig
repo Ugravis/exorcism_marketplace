@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Backlog - {{ service.title }}{% endblock %}
+
+{% block body %}
+    <div id="backlog" class="container cont-top flex-col">
+        <div class="flex-col gap-2">
+            <div class="flex gap-1">
+                <h1>{{ service.title }}</h1>
+
+                {% if service.certified %}
+                    <span class="material-symbols-outlined icon-h1 flex-center blue">verified</span>
+                {% endif %}
+            </div>
+
+            <p>{{ service.bookings|length }} demandes de rendez-vous</p>
+        </div>
+
+        <div class="flex-col gap-3">
+            <div id="map" style="height: 500px; width: 100%; margin-top: 2rem;"></div>
+
+            {% if service.bookings|length > 0 %}
+                <table>
+                    <tr>
+                        <th>Adresse</th>
+                        <th>Date préférée</th>
+                        <th>Lieu</th>
+                        <th>Cible</th>
+                        <th>Objectif</th>
+                        <th>Urgence</th>
+                    </tr>
+                    {% for booking in service.bookings %}
+                        <tr>
+                            <td>{{ booking.address }}, {{ booking.postalCode }} {{ booking.city }}</td>
+                            <td>{{ booking.sheduledAt ? booking.sheduledAt|date('Y-m-d H:i') : '' }}</td>
+                            <td>{{ booking.locationLabel }}</td>
+                            <td>{{ booking.targetLabel }}</td>
+                            <td>{{ booking.objectiveLabel }}</td>
+                            <td>{{ booking.urgencyLabel }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>Aucun booking pour ce service.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <style>
+        .leaflet-popup-tip {
+            display: none;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mapContainer = document.getElementById('map');
+            if (!mapContainer) return;
+
+            const bookingCoords = [
+                {% for booking in service.bookings %}
+                    {
+                        lat: {{ booking.latitude }},
+                        lng: {{ booking.longitude }},
+                        address: "{{ booking.address|e('js') }}",
+                        city: "{{ booking.city|default('')|e('js') }}",
+                        sheduledAt: "{{ booking.sheduledAt ? booking.sheduledAt|date('Y-m-d H:i') : '' }}"
+                    }{% if not loop.last %},{% endif %}
+                {% endfor %}
+            ];
+
+            const map = L.map(mapContainer);
+
+            L.tileLayer('https://tile.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey=3459ca86e7404c7082ff1460541f46d0', {
+                attribution: '&copy; OpenStreetMap contributors',
+                detectRetina: true
+            }).addTo(map);
+
+            if (bookingCoords.length === 0) {
+                map.setView([48.8566, 2.3522], 5); // Paris par défaut
+                return;
+            }
+
+            const markers = [];
+
+            bookingCoords.forEach(b => {
+                if (b.lat && b.lng) {
+                    const popupContent = `${b.address}${b.city ? ', ' + b.city : ''}${b.sheduledAt ? ' - ' + b.sheduledAt : ''}`;
+                    const marker = L.marker([b.lat, b.lng])
+                        .addTo(map)
+                        .bindPopup(popupContent);
+                    markers.push(marker);
+                }
+            });
+
+            map.fitBounds(L.featureGroup(markers).getBounds().pad(0.2));
+        });
+    </script>
+{% endblock %}

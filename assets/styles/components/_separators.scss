@@ -1,0 +1,13 @@
+@use '../variables' as v;
+
+.separator-1 {
+  background-color: v.$theme-light-text-light;
+  width: 100%;
+  height: 1px;
+}
+
+.separator-2 {
+  background-color: #424036;
+  width: 100%;
+  height: 1px;
+}

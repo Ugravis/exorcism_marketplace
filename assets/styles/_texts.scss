@@ -28,7 +28,11 @@ $colors: (
 }
 
 h1, .h1 {
-  @include title-font(32px);
+  @include title-font(28px);
+}
+
+h2, .h2 {
+  @include title-font(22px);
 }
 
 h3, .h3 {
@@ -56,6 +60,21 @@ p, .p, a, .a {
 .p2 {
   @include body-font(14px);
 }
+.p3 {
+  @include body-font(14px, 'light-txt');
+}
+.p4 {
+  @include body-font(14px, 'light-txt');
+  font-style: italic;
+}
+
+// // // Links // // //
+
+.link {
+  text-decoration: none;
+  color: v.$theme-light-text-dark;
+  &:hover { color: v.$theme-light-text-blue; }
+}
 
 // // // Temp // // //
 
@@ -65,6 +84,22 @@ p, .p, a, .a {
 }
 
 .input-group ul li, .input-error {
-  @include body-font(14px);
+  @include body-font(13px);
   color: red;
+  font-style: italic;
+}
+
+// // // Matrial icons // // //
+
+.icon-h3 {
+  font-size: 16px;
+  text-decoration: none;
+}
+.icon-h1 {
+  font-size: 24px;
+  text-decoration: none;
+}
+.icon-p2 {
+  font-size: 13px;
+  text-decoration: none;
 }

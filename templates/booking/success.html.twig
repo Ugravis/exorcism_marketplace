@@ -3,9 +3,23 @@
 {% block title %}Resume{% endblock %}
 
 {% block body %}
-    <div id="booking-result-page" class="flex-col">
+    <div id="booking-result-page" class="container cont-top flex-center flex-col gap-4">
         <h1>Demande envoyée</h1>
-        <p>Numéro de votre demande : {{ booking.id }}</p>
-        <a href="{{ path('app_services') }}" class="visible-link">Retour à la liste des services</a>
+
+        <span class="separator-1"></span>
+
+        <div class="flex-col gap-3">
+            <div class="flex-col gap-1">
+                <p class="flex-center gap-1">Numéro de votre demande : <b>#{{ booking.id }}</b></p>
+                <p class="flex-center">Vous serez recontacté ultérieurement par l'entreprise.</p>
+            </div>
+            
+            <div class="flex-center">
+                <a href="{{ path('app_home') }}" class="flex-center gap-1 btn-small-secundary">
+                    <span class="material-symbols-outlined icon-h3 flex-center">arrow_left_alt</span> 
+                    Retour à l'accueil
+                </a>
+            </div>
+        </div>
     </div>
 {% endblock %}

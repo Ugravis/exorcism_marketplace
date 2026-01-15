@@ -1,0 +1,32 @@
+@use '../variables' as v;
+
+textarea, select, input {
+  background-color: v.$theme-light-background-default;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-size: 16px;
+  border: 1.5px solid v.$theme-light-text-dark;
+}
+
+textarea {
+  resize: vertical;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  background: url('../../../public/images/icons/triangle.png') no-repeat right 10px center;
+  background-size: 7px;
+}
+
+.input-group {
+  gap: 0.3rem;
+  width: 100%;
+}
+
+.js-datepicker {
+  background: url('../../../public/images/icons/calendar.png') no-repeat right 10px center;
+  background-size: 20px;
+}

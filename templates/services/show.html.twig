@@ -4,10 +4,57 @@
 
 {% block body %}
 
-<div id="service-page" class="flex-col">
-    <h1>{{ service.title }}</h1>
-    <p>{{ service.description }}</p>
-    <a href="{{ path('app_booking_step1', {'id': service.id}) }}" class="visible-link">Obtenir un devis</a>
-    <a href="{{ path('app_services') }}" class="visible-link">Retour à la liste des services</a>
+<div id="service-page" class="flex-col container cont-top gap-8">
+    <div class="flex-col gap-3">
+        <a href="{{ path('app_services') }}" class="link p4 flex gap-1">
+            <span class="material-symbols-outlined icon-h3 flex-center">arrow_left_alt</span> 
+            Retour à la liste des services
+        </a>
+
+        <div class="flex top">
+            <div class="service-info__image" style="background-image: url('{{ asset('images/services/' ~ service.image) }}');"></div>
+
+            <div class="flex-col top-right">
+                <div class="flex-col gap-2">
+                    <div class="flex gap-1">
+                        <h1>{{ service.title }}</h1>
+
+                        {% if service.certified %}
+                            <span class="material-symbols-outlined icon-h1 flex-center blue">verified</span>
+                        {% endif %}
+                    </div>
+
+                    <p>{{ service.description }}</p>
+
+                    <p class="p4">Le prix affiché constitue le tarif minimum. Le prix peut varier en fonction du type d'intervention et de votre emplacement géographique *</p>
+                </div>
+
+                <div class="flex gap-3">
+                    <a href="{{ path('app_booking_step1', {'id': service.id}) }}" class="btn-small">Obtenir un devis</a>
+                    <p class="h3 flex-center">{{ service.price|number_format(0) }} €</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <span class="separator-1"></span>
+
+    <div class="flex-col gap-4">
+        <h2>{{ service.reviews|length }} avis</h2>
+
+        <ul class="review-cards">
+            {% for review in service.reviews %}
+                <li class="review-card">
+                    <div class="stars-box">
+                        {{ rating_stars(review.rating) }}
+                    </div>
+
+                    <h3>{{ review.title }}</h3>
+
+                    <p>{{ review.content }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock %}

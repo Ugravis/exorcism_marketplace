@@ -1,3 +1,22 @@
+@use '../variables' as v;
+
 footer {
-  background-color: rgb(203, 207, 255);
+  background-color: v.$theme-light-background-dark-dark;
+  color: v.$theme-light-text-dark-dark;
+  padding: 18px 7%;
+
+  p, h2, i {
+    color: v.$theme-light-text-dark-dark;
+  }
+
+  .rights p {
+    font-size: 14px;
+    font-style: italic;
+  }
+}
+
+.social-icons {
+  i {
+    font-size: 24px;
+  }
 }

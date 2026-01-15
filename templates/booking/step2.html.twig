@@ -3,81 +3,123 @@
 {% block title %}Booking{% endblock %}
 
 {% block body %}
-    <div id="booking-page">
-        <h1>Booking step 2</h1>
-
-        {# {{ form_start(form, { 'attr': { 'class': 'flex-col' }}) }} #}
-        {{ form_start(form, { 'attr': { 'novalidate': 'novalidate', 'class': 'flex-col' }}) }}
-        
-        <div class="flex-col input-group">
-            {{ form_label(form.customer.firstName) }}
-            {{ form_widget(form.customer.firstName) }}
-            {{ form_errors(form.customer.firstName) }}
+    <div id="booking-page" class="container cont-top flex gap-8">
+        <div class="booking__image" style="background-image: url('{{ asset('images/services/' ~ service.image) }}');">
+            <h1>{{ service.title }}</h1>
         </div>
 
-        <div class="flex-col input-group">
-            {{ form_label(form.customer.surname) }}
-            {{ form_widget(form.customer.surname) }}
-            {{ form_errors(form.customer.surname) }}
-        </div>
+        <div class="booking__form flex-col gap-3">
+            <div class="flex-col gap-2">
+                <p class="p4">Etape 2/2</p>
 
-        <div class="flex-col input-group">
-            {{ form_label(form.customer.email) }}
-            {{ form_widget(form.customer.email) }}
-            {{ form_errors(form.customer.email) }}
-        </div>
-
-        <div class="flex-col input-group">
-            {{ form_label(form.customer.phone) }}
-            {{ form_widget(form.customer.phone) }}
-            {{ form_errors(form.customer.phone) }}
-        </div>
-        
-        <div class="flex-col input-group">
-            {{ form_label(form.sheduledAt) }}
-            {{ form_widget(form.sheduledAt) }}
-            {{ form_errors(form.sheduledAt) }}
-        </div>
-
-        <div class="flex-col input-group">
-            {{ form_label(form.address) }}
-            {{ form_widget(form.address) }}
-            {{ form_errors(form.address) }}
-        </div>
-
-        <ul id="address-suggestions" class="flex-col"></ul>
-
-        <div class="flex-col input-group">
-            {{ form_label(form.address_line_2) }}
-            {{ form_widget(form.address_line_2) }}
-            {{ form_errors(form.address_line_2) }}
-        </div>
-
-        <div class="flex-col input-group">
-            {{ form_label(form.city) }}
-            {{ form_widget(form.city) }}
-            {{ form_errors(form.city) }}
-        </div>
-        
-        <div class="flex-col input-group">
-            {{ form_label(form.postal_code) }}
-            {{ form_widget(form.postal_code) }}
-            {{ form_errors(form.postal_code) }}
-        </div>
-
-        <div class="flex-col input-group">
-            <div>
-                {{ form_label(form.acceptTerms) }}
-                {{ form_widget(form.acceptTerms) }}
+                <h1>Contact</h1>
             </div>
-            {{ form_errors(form.acceptTerms) }}
-        </div>
-        
-        <div>
-            <a href="{{ path('app_booking_step1', { 'id': service.id }) }}" class="btn-small-secundary">Etape précédente</a>
-            {{ form_widget(form.submit, { 'attr': { 'class': 'btn-small' }}) }}
-        </div>
 
-        {{ form_end(form) }}
+            {{ form_start(form, { 'attr': { 'novalidate': 'novalidate', 'class': 'flex-col' }}) }}
+            
+            <div class="flex-col gap-3">
+                <div class="flex gap-2">
+                    <div class="flex-col input-group">
+                        <div>
+                            {{ form_label(form.customer.firstName) }}
+                            {{ form_errors(form.customer.firstName) }}
+                        </div>
+                        {{ form_widget(form.customer.firstName) }}
+                    </div>
+
+                    <div class="flex-col input-group">
+                        <div>
+                            {{ form_label(form.customer.surname) }}
+                            {{ form_errors(form.customer.surname) }}
+                        </div>
+                        {{ form_widget(form.customer.surname) }}
+                    </div>
+                </div>
+
+                <div class="flex gap-2">
+                    <div class="flex-col input-group">
+                        <div>
+                            {{ form_label(form.customer.email) }}
+                            {{ form_errors(form.customer.email) }}
+                        </div>
+                        {{ form_widget(form.customer.email) }}
+                    </div>
+
+                    <div class="flex-col input-group">
+                        <div>
+                            {{ form_label(form.customer.phone) }}
+                            {{ form_errors(form.customer.phone) }}
+                        </div>
+                        {{ form_widget(form.customer.phone) }}
+                    </div>
+                </div>
+
+                <h1>Votre rendez-vous</h1>
+                
+                <div class="flex-col input-group">
+                    {{ form_label(form.sheduledAt) }}
+                    {{ form_widget(form.sheduledAt, {
+                        'attr': {
+                            'class': 'js-datepicker',
+                            'data-disabled-dates': disabledDates|json_encode
+                        }
+                    }) }}
+                    {{ form_errors(form.sheduledAt) }}
+                </div>
+
+                <div class="flex gap-1">
+                    <div class="flex-col input-group address-group">
+                        <div>
+                            {{ form_label(form.address) }}
+                            {{ form_errors(form.address) }}
+                        </div>
+                        {{ form_widget(form.address) }}
+
+                        <ul id="address-suggestions" class="flex-col p"></ul>
+                    </div>
+
+                    <div class="flex-col input-group">
+                        <div>
+                            {{ form_label(form.address_line_2) }}
+                            {{ form_errors(form.address_line_2) }}
+                        </div>
+                        {{ form_widget(form.address_line_2) }}
+                    </div>
+                </div>
+
+                <div class="flex gap-2">
+                    <div class="flex-col input-group">
+                        <div>
+                            {{ form_label(form.city) }} 
+                            {{ form_errors(form.city) }}
+                        </div>
+                        {{ form_widget(form.city) }}
+                    </div>
+                    
+                    <div class="flex-col input-group">
+                        <div>
+                            {{ form_label(form.postal_code) }}
+                            {{ form_errors(form.postal_code) }}
+                        </div>
+                        {{ form_widget(form.postal_code) }}
+                    </div>
+                </div>
+
+                <div class="flex-col input-group">
+                    <div>
+                        {{ form_label(form.acceptTerms) }}
+                        {{ form_widget(form.acceptTerms) }}
+                    </div>
+                    {{ form_errors(form.acceptTerms) }}
+                </div>
+                
+                <div class="flex-center gap-1">
+                    {{ form_widget(form.back, { 'attr': { 'class': 'btn-small-secundary' } }) }}
+                    {{ form_widget(form.submit, { 'attr': { 'class': 'btn-small' }}) }}
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
     </div>
 {% endblock %}

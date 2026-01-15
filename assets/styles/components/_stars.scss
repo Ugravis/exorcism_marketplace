@@ -1,0 +1,28 @@
+@use '../variables' as v;
+
+.stars-with-label {
+  gap: 8px;
+}
+
+.stars-box {
+  display: flex;
+  gap: 4px;
+}
+
+.star {
+  font-size: 0.85rem;
+}
+
+.star.full,
+.star.half {
+  color: gold;
+}
+
+.star.empty {
+  color: v.$theme-light-text-light;
+}
+
+.no-rating {
+  font-size: 0.9rem;
+  color: v.$theme-light-text-light;
+}

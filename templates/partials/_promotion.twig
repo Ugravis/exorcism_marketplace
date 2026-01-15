@@ -1,0 +1,28 @@
+<div class="promo-banner flex-center flex-between" id="promo-banner">
+    <div style="width: 22px;"></div>
+
+    <p class="p2 flex gap-1">
+        Bonne année ! -10% sur le tout le site avec le code UNDEAD2026
+        <span class="material-symbols-outlined icon-p2 flex-center pointer">
+            content_copy
+        </span>
+    </p>
+
+    <button type="button" id="promo-banner-close">
+        <span class="material-symbols-outlined icon-p2 flex-center">close</span>
+    </button>
+</div>
+
+<script>
+    const banner = document.getElementById('promo-banner');
+    const closeBtn = document.getElementById('promo-banner-close');
+
+    if (localStorage.getItem('promoBannerClosed') === 'true') {
+        banner.remove();
+    }
+
+    closeBtn.addEventListener('click', () => {
+        localStorage.setItem('promoBannerClosed', 'true');
+        banner.remove();
+    });
+</script>

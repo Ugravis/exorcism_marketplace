@@ -1,0 +1,48 @@
+.service-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+
+  .service-card {
+    border-radius: 15px;
+    box-shadow: 0 4px 4px 0 #00000010;
+
+    .service-card__image {
+      width: 100%;
+      height: 180px;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      background-size: cover;     
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .content {
+      padding: 18px 22px;
+      gap: 8px;
+
+      .bottom {
+        gap: 16px;
+      }
+
+      .title-with-certified {
+        gap: 6px;
+      }
+    }
+  }
+}
+
+.review-cards { 
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 1.5rem;
+
+  .review-card {
+    box-shadow: 0 0 8px 0 #00000010;
+    border-radius: 15px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

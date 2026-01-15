@@ -1,0 +1,21 @@
+#backlog {
+  table, th, td, thead, tbody {
+    width: 100%;
+  }
+
+  td {
+    padding: 15px 20px;
+    white-space: nowrap;
+  }
+
+  table {
+    font-family: sans-serif;
+    font-size: 0.95rem;
+  }
+  th {
+    background-color: #f8f8f8;
+  }
+  td, th {
+    border: 1px solid #ddd;
+  }
+}

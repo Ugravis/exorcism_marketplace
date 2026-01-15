@@ -4,15 +4,42 @@
 
 {% block body %}
 
-<div id="services-page" class="flex-col">
-    <h1>Nos services</h1>
-
-    <ul class="flex-col">
+<div id="services-page cont-top" class="flex-col container cont-top">
+    <ul class="flex-col service-cards">
         {% for service in services %}
-            <li>
-                <a href="{{ path('app_service_details', {'id': service.id}) }}" class="visible-link">
-                    {{ service.title }} ({{ service.price }}€)
-                </a>
+            <li class="service-card flex-col">
+                <div class="service-card__image" style="background-image: url('{{ asset('images/services/' ~ service.image) }}');"></div>
+
+                <div class="content flex-col">
+                    <div class="flex title-with-certified">
+                        <h3>{{ service.title }}</h3>
+
+                        {% if service.certified %}
+                            <span class="material-symbols-outlined icon-h3 flex-center blue">verified</span>
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        <p class="p3">
+                            <span class="material-symbols-outlined icon-h3 grey">location_on</span> 
+                            {{ service.city }} | 
+                            {{ service.description|length > 100 ? service.description|slice(0, 65) ~ ' ...' : service.description }}
+                        </p>
+                    </div>
+
+                    <div class="flex stars-with-label">
+                        <div class="stars-box">
+                            {{ rating_stars(service) }}
+                        </div>
+
+                        <p class="p3 flex-center">{{ service.reviews|length }} avis</p>
+                    </div>
+
+                    <div class="flex-between bottom">
+                        <p class="h3 nowrap">{{ service.price|number_format(0) }} €</p>
+                        <a href="{{ path('app_service_details', {'id': service.id}) }}" class="btn-small">Voir plus</a>
+                    </div>
+                </div>
             </li>
         {% endfor %}
     </ul>

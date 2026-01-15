@@ -1,0 +1,10 @@
+@use '../variables' as v;
+
+.promo-banner {
+  background-color: rgb(255, 93, 61);
+  padding: 10px 20px;
+  
+  p, span {
+    color: #ffefec;
+  }
+}

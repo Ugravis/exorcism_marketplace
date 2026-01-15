@@ -1,3 +1,5 @@
+{% set currentRoute = app.request.attributes.get('_route') %}
+
 <nav id="nav-principal" class="flex-between">
     <div class="flex"> 
         <div class="logo-temp"></div>
@@ -5,14 +7,49 @@
     </div>
 
     <ul>
-        <li><a class="h3-regular nav-element nav-element-active" href="{{ path('app_home') }}">Accueil</a></li>
-        <li><a class="h3-regular nav-element" href="{{ path('app_services') }}">Services</a></li>
-        <li><a class="h3-regular nav-element" href="{{ path('app_blog') }}">Actualités</a></li>
-        <li><a class="h3-regular nav-element" href="{{ path('app_about') }}">Histoire</a></li>
+        <li>
+            <a
+                href="{{ path('app_home') }}"
+                class="h3-regular nav-element {{ currentRoute == 'app_home' ? 'nav-element-active' : '' }}"
+            >
+                Accueil
+            </a>
+        </li>
+
+        <li>
+            <a
+                href="{{ path('app_services') }}"
+                class="h3-regular nav-element {{ currentRoute starts with 'app_services' ? 'nav-element-active' : '' }}"
+            >
+                Services
+            </a>
+        </li>
+
+        {# <li>
+            <a
+                href="{{ path('app_blog') }}"
+                class="h3-regular nav-element {{ currentRoute starts with 'app_blog' ? 'nav-element-active' : '' }}"
+            >
+                Actualités
+            </a>
+        </li>
+
+        <li>
+            <a
+                href="{{ path('app_about') }}"
+                class="h3-regular nav-element {{ currentRoute == 'app_about' ? 'nav-element-active' : '' }}"
+            >
+                Histoire
+            </a>
+        </li> #}
     </ul>
 
     <div class="flex">
-        <button><span class="material-symbols-outlined">light_mode</span></button>
-        <button><span class="material-symbols-outlined">account_circle</span></button>
+        <button type="button">
+            <span class="material-symbols-outlined">light_mode</span>
+        </button>
+        <button type="button">
+            <span class="material-symbols-outlined">account_circle</span>
+        </button>
     </div>
 </nav>

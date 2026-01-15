@@ -3,46 +3,66 @@
 {% block title %}Booking{% endblock %}
 
 {% block body %}
-    <div id="booking-page">
-        <h1>Booking step 1</h1>
-
-        {{ form_start(form, { 'attr': { 'novalidate': 'novalidate', 'class': 'flex-col' }}) }}
-        
-        <div class="flex-col input-group">
-            {{ form_label(form.location_type) }}
-            {{ form_widget(form.location_type) }}
-            {{ form_errors(form.location_type) }}
+    <div id="booking-page" class="container cont-top flex gap-8">
+        <div class="booking__image" style="background-image: url('{{ asset('images/services/' ~ service.image) }}');">
+            <h1>{{ service.title }}</h1>
         </div>
 
-        <div class="flex-col input-group">
-            {{ form_label(form.urgency_rank) }}
-            {{ form_widget(form.urgency_rank) }}
-            {{ form_errors(form.urgency_rank) }}
-        </div>
-        
-        <div class="flex-col input-group">
-            {{ form_label(form.target_type) }}
-            {{ form_widget(form.target_type) }}
-            {{ form_errors(form.target_type) }}
-        </div>
+        <div class="booking__form flex-col gap-3">
+            <div class="flex-col gap-2">
+                <p class="p4">Etape 1/2</p>
 
-        <div class="flex-col input-group">
-            {{ form_label(form.objective_type) }}
-            {{ form_widget(form.objective_type) }}
-            {{ form_errors(form.objective_type) }}
-        </div>
+                <h1>Informations</h1>
+            </div>
 
-        <div class="flex-col input-group">
-            {{ form_label(form.moreInformation) }}
-            {{ form_help(form.moreInformation) }}
-            {{ form_widget(form.moreInformation) }}
-            {{ form_errors(form.moreInformation) }}
-        </div>
-        
-        <div>
-            {{ form_widget(form.submit, { 'attr': { 'class': 'btn-small' }}) }}
-        </div>
+            {{ form_start(form, { 'attr': { 'novalidate': 'novalidate', 'class': 'flex-col' }}) }}
+            
+            <div class="flex-col gap-3">
+                <div class="flex-col input-group">
+                    <div>
+                        {{ form_label(form.location_type) }}
+                        {{ form_errors(form.location_type) }}
+                    </div>
+                    {{ form_widget(form.location_type) }}
+                </div>
 
-        {{ form_end(form) }}
+                <div class="flex-col input-group">
+                    <div>
+                        {{ form_label(form.urgency_rank) }}
+                        {{ form_errors(form.urgency_rank) }}
+                    </div>
+                    {{ form_widget(form.urgency_rank) }}
+                </div>
+                
+                <div class="flex-col input-group">
+                    <div>
+                        {{ form_label(form.target_type) }}
+                        {{ form_errors(form.target_type) }}
+                    </div>
+                    {{ form_widget(form.target_type) }}
+                </div>
+
+                <div class="flex-col input-group">
+                    <div>
+                        {{ form_label(form.objective_type) }}
+                        {{ form_errors(form.objective_type) }}
+                    </div>
+                    {{ form_widget(form.objective_type) }}
+                </div>
+
+                <div class="flex-col input-group">
+                    {{ form_label(form.moreInformation) }}
+                    {{ form_help(form.moreInformation, { 'attr': { 'class': 'p2' }}) }}
+                    {{ form_widget(form.moreInformation) }}
+                    {{ form_errors(form.moreInformation) }}
+                </div>
+                
+                <div class="flex-center">
+                    {{ form_widget(form.submit, { 'attr': { 'class': 'btn-small' }}) }}
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
     </div>
 {% endblock %}

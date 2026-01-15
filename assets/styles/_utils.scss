@@ -1,3 +1,5 @@
+@use 'variables' as v;
+
 .text-center {
   text-align: center;
 }
@@ -31,4 +33,35 @@
 
 .heigth-max {
   height: 100%;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.blue {
+  color: #2C8BFF;
+}
+.grey {
+  color: v.$theme-light-text-light;
+}
+
+.gap-1 {
+  gap: 0.5rem;
+}
+.gap-2 {
+  gap: 1rem;
+}
+.gap-3 {
+  gap: 1.5rem;
+}
+.gap-4 {
+  gap: 2rem;
+}
+.gap-8 {
+  gap: 4rem;
+}
+
+.pointer {
+  cursor: pointer;
 }

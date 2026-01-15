@@ -34,9 +34,35 @@ class Service
     #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'service')]
     private Collection $bookings;
 
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    /**
+     * @var Collection<int, Review>
+     */
+    #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'service_id')]
+    private Collection $reviews;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $email = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $address = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $phone = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $certified = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $city = null;
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
+        $this->reviews = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -118,6 +144,108 @@ class Service
                 $booking->setService(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Review>
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): static
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews->add($review);
+            $review->setServiceId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): static
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getServiceId() === $this) {
+                $review->setServiceId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): static
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): static
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function isCertified(): ?bool
+    {
+        return $this->certified;
+    }
+
+    public function setCertified(?bool $certified): static
+    {
+        $this->certified = $certified;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): static
+    {
+        $this->city = $city;
 
         return $this;
     }
